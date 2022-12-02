@@ -49,30 +49,30 @@ services:
     volumes:
       - data-postgres:/var/lib/postgresql/data
 
-  microservicios-postgres15:
-    container_name: microservicios-postgres15
-    image: postgres:15-alpine
-    ports:
-      - "5532:5532"
-    restart: unless-stopped
-    networks:
-      - springcloud
-    environment:
-      POSTGRES_DB: db_springboot_cloud
-      POSTGRES_PASSWORD: root
-    volumes:
-      - data-postgres:/var/lib/postgresql/data
+#  microservicios-postgres15:
+#    container_name: microservicios-postgres15
+#    image: postgres:15-alpine
+#    ports:
+#      - "5532:5532"
+#    restart: unless-stopped
+#    networks:
+#      - springcloud
+#    environment:
+#      POSTGRES_DB: db_springboot_cloud
+#      POSTGRES_PASSWORD: root
+#    volumes:
+#      - data-postgres:/var/lib/postgresql/data
 
   servicio-productos:
     container_name: servicio-productos
-    image: georgegxx/servicio-productos:v1
+    image: georgegxx/servicio-productos:latest
     restart: unless-stopped
     networks:
       - springcloud
     depends_on:
       - config-server
       - servicio-eureka-server
-      - microservicios-postgres15
+      - microservicios-postgres14
 
   servicio-items:
     container_name: servicio-items
