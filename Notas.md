@@ -88,6 +88,8 @@ docker exec -it config-server bash
 
 docker image prune --all --force
 
+docker volume prune --force
+
 ---
 
 docker build -t servicio-productos:v1 .
