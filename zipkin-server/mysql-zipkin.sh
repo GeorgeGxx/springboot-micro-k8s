@@ -15,7 +15,7 @@ alter user 'zipkin'@'%' identified with mysql_native_password by 'zipkin';
 grant all privileges on zipkin.* to 'zipkin'@'%';
 flush privileges;
 exit;
-#cd docker-compose
+#cd springboot-micro-docker/docker-compose
 
 #RUN docker exec -it microservicios-mysql8 bash
 #RUN cd /tmp

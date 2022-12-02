@@ -65,7 +65,7 @@ services:
 
   servicio-productos:
     container_name: servicio-productos
-    image: georgegxx/servicio-productos:latest
+    image: georgegxx/servicio-productos:v1
     restart: unless-stopped
     networks:
       - springcloud
