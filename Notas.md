@@ -82,6 +82,8 @@ docker run -p 5532:5432 --name microservicios-postgres14 --network springcloud -
 
 ---
 
+sudo rm -rf repos
+
 docker logs -f config-server
 
 docker exec -it config-server bash
