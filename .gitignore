@@ -32,6 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
+config/
 springboot-servicio-commons/
 springboot-servicio-config-server/
 springboot-servicio-eureka-server/
