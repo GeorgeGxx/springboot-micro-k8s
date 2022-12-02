@@ -4,6 +4,8 @@ With Java 11 & Saga Pattern with Spring Boot, Spring Cloud and Eureka on Docker.
 
 Para instancias de 16Gb+ de RAM con imagen SQL sin imagen pueden ser 8Gb.
 
+Git log, git diff y git checkout hacia el hash del commit que se quiere restaurar y observar los updates en el tiempo.
+
 #### `Checkout` the [Notas](Notas.md) files for more details.
 
 #### `Checkout` the msa for EC2:
