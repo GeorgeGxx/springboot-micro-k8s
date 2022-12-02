@@ -53,7 +53,7 @@ services:
     container_name: microservicios-postgres15
     image: postgres:15-alpine
     ports:
-      - "5432:5432"
+      - "5532:5532"
     restart: unless-stopped
     networks:
       - springcloud
