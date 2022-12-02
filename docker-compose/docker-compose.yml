@@ -1,0 +1,166 @@
+services:
+  config-server:
+    container_name: config-server
+    image: GeorgeGxx/config-server:v1
+    ports:
+      - "8888:8888"
+    restart: unless-stopped
+    networks:
+      - springcloud
+
+  servicio-eureka-server:
+    container_name: servicio-eureka-server
+    image: GeorgeGxx/servicio-eureka-server:latest
+    ports:
+      - "8761:8761"
+    restart: unless-stopped
+    networks:
+      - springcloud
+
+  microservicios-mysql8:
+    container_name: microservicios-mysql8
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    networks:
+      - springcloud
+    environment:
+      MYSQL_DATABASE: zipkin
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - data-mysql:/var/lib/mysql
+    ### Después de subir el contenedor de mysql8 ejecutas el mysql-zipkin.sh linea por linea para crear el schema y el usuario de zipkin:
+    ### Para automatizar hay que tunear lo siguiente:
+    ### sudo chmod +x /zipkin-server/mysql-zipkin.sh
+    ### sudo ./mysql-zipkin.sh
+
+  microservicios-postgres14:
+    container_name: microservicios-postgres14
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - springcloud
+    environment: 
+      POSTGRES_DB: db_springboot_cloud
+      POSTGRES_PASSWORD: root
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+
+  microservicios-postgres15:
+    container_name: microservicios-postgres15
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - springcloud
+    environment:
+      POSTGRES_DB: db_springboot_cloud
+      POSTGRES_PASSWORD: root
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+
+  servicio-productos:
+    container_name: servicio-productos
+    image: GeorgeGxx/servicio-productos:latest
+    restart: unless-stopped
+    networks:
+      - springcloud
+    depends_on:
+      - config-server
+      - servicio-eureka-server
+      - microservicios-postgres15
+
+  servicio-items:
+    container_name: servicio-items
+    image: GeorgeGxx/servicio-items:latest
+    ports:
+      - "8002:8002"
+      - "8005:8005"
+      - "8007:8007"
+    restart: unless-stopped
+    networks:
+      - springcloud
+    depends_on:
+      - config-server
+      - servicio-eureka-server
+      - servicio-productos
+
+  servicio-usuarios:
+    container_name: servicio-usuarios
+    image: GeorgeGxx/servicio-usuarios:latest
+    restart: unless-stopped
+    networks:
+      - springcloud
+    depends_on:
+      - config-server
+      - servicio-eureka-server
+      - microservicios-postgres14
+
+  servicio-oauth:
+    container_name: servicio-oauth
+    image: GeorgeGxx/servicio-oauth:latest
+    ports:
+      - "9100:9100"
+    restart: unless-stopped
+    networks:
+      - springcloud
+    depends_on:
+      - config-server
+      - servicio-eureka-server
+      - servicio-usuarios
+
+  servicio-zuul-server:
+    container_name: servicio-zuul-server
+    image: GeorgeGxx/servicio-zuul-server:latest
+    ports:
+      - "8090:8090"
+    restart: unless-stopped
+    networks:
+      - springcloud
+    depends_on:
+      - config-server
+      - servicio-eureka-server
+      - servicio-productos
+      - servicio-items
+      - servicio-usuarios
+      - servicio-oauth
+
+  microservicios-rabbitmq39:
+    container_name: microservicios-rabbitmq39
+    image: rabbitmq:3.9-management-alpine
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: unless-stopped
+    networks:
+      - springcloud
+
+  zipkin-server:
+    container_name: zipkin-server
+    image: GeorgeGxx/zipkin-server:latest
+    ports:
+      - "9411:9411"
+    restart: unless-stopped
+    networks:
+      - springcloud
+    depends_on:
+      - microservicios-rabbitmq39
+      - microservicios-mysql8
+    environment:
+      RABBIT_ADDRESSES: microservicios-rabbitmq39:5672
+      STORAGE_TYPE: mysql
+      MYSQL_USER: zipkin
+      MYSQL_PASS: zipkin
+      MYSQL_HOST: microservicios-mysql8
+
+volumes:
+  data-mysql:
+  data-postgres:
+
+networks:
+  springcloud:
+
