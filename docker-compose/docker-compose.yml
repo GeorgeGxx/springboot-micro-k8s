@@ -1,7 +1,7 @@
 services:
   config-server:
     container_name: config-server
-    image: GeorgeGxx/config-server:v1
+    image: georgegxx/config-server:v1
     ports:
       - "8888:8888"
     restart: unless-stopped
@@ -10,7 +10,7 @@ services:
 
   servicio-eureka-server:
     container_name: servicio-eureka-server
-    image: GeorgeGxx/servicio-eureka-server:latest
+    image: georgegxx/servicio-eureka-server:latest
     ports:
       - "8761:8761"
     restart: unless-stopped
@@ -65,7 +65,7 @@ services:
 
   servicio-productos:
     container_name: servicio-productos
-    image: GeorgeGxx/servicio-productos:latest
+    image: georgegxx/servicio-productos:latest
     restart: unless-stopped
     networks:
       - springcloud
@@ -76,7 +76,7 @@ services:
 
   servicio-items:
     container_name: servicio-items
-    image: GeorgeGxx/servicio-items:latest
+    image: georgegxx/servicio-items:latest
     ports:
       - "8002:8002"
       - "8005:8005"
@@ -91,7 +91,7 @@ services:
 
   servicio-usuarios:
     container_name: servicio-usuarios
-    image: GeorgeGxx/servicio-usuarios:latest
+    image: georgegxx/servicio-usuarios:latest
     restart: unless-stopped
     networks:
       - springcloud
@@ -102,7 +102,7 @@ services:
 
   servicio-oauth:
     container_name: servicio-oauth
-    image: GeorgeGxx/servicio-oauth:latest
+    image: georgegxx/servicio-oauth:latest
     ports:
       - "9100:9100"
     restart: unless-stopped
@@ -115,7 +115,7 @@ services:
 
   servicio-zuul-server:
     container_name: servicio-zuul-server
-    image: GeorgeGxx/servicio-zuul-server:latest
+    image: georgegxx/servicio-zuul-server:latest
     ports:
       - "8090:8090"
     restart: unless-stopped
@@ -141,7 +141,7 @@ services:
 
   zipkin-server:
     container_name: zipkin-server
-    image: GeorgeGxx/zipkin-server:latest
+    image: georgegxx/zipkin-server:latest
     ports:
       - "9411:9411"
     restart: unless-stopped
