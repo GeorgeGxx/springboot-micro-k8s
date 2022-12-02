@@ -1,3 +1,0 @@
-# Crear el .jar
-
-.\mvnw.cmd install
