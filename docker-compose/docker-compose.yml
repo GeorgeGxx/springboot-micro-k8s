@@ -1,7 +1,7 @@
 services:
   config-server:
     container_name: config-server
-    image: georgegxx/config-server:v1
+    image: georgegxx/config-server:latest
     ports:
       - "8888:8888"
     restart: unless-stopped
