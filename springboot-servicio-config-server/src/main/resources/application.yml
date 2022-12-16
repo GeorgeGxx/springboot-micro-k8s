@@ -1,0 +1,15 @@
+server:
+  port: 8888
+spring:
+    application:
+        name: config-server
+    cloud:
+      config:
+        server:
+          git:
+            uri: https://github.com/GeorgeGxx/config-bundle.git
+            username: GeorgeGxx
+            password: 123456
+logging:
+  file:
+    path: /app/logs/config-server.log

@@ -34,12 +34,12 @@ build/
 
 config/
 springboot-servicio-commons/
-springboot-servicio-config-server/
-springboot-servicio-eureka-server/
-springboot-servicio-gateway-server/
-springboot-servicio-item/
-springboot-servicio-oauth/
-springboot-servicio-productos/
-springboot-servicio-usuarios/
 springboot-servicio-usuarios-commons/
-springboot-servicio-zuul-server/
+springboot-servicio-gateway-server/
+#springboot-servicio-config-server/
+#springboot-servicio-eureka-server/
+#springboot-servicio-item/
+#springboot-servicio-oauth/
+#springboot-servicio-productos/
+#springboot-servicio-usuarios/
+#springboot-servicio-zuul-server/
