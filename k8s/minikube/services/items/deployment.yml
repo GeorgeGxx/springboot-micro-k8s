@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servicio-items
+  labels:
+    app: servicio-items
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: servicio-items
+      labels:
+        app: servicio-items
+    spec:
+      containers:
+        - name: servicio-items
+          image: georgegxx/servicio-items:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8002
+            - containerPort: 8005
+            - containerPort: 8007
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kube
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: servicio-items

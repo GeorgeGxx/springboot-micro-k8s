@@ -3,6 +3,10 @@ server:
     - 8002
     - 8005
     - 8007
+#    - containerPort: 8002
+#    - containerPort: 8002
+#      name: http
+#      protocol: TCP
 spring:
   application:
     name: servicio-items
